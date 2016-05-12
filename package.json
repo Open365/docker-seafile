@@ -1,0 +1,10 @@
+{
+  "name": "seafileServer",
+  "version": "0.0.1",
+  "author": "eyeOS",
+  "homepage": "http://www.eyeos.com/",
+  "microservices": [
+    "mysql.service.consul:3306"
+  ],
+  "license": "AGPL-3.0"
+}
