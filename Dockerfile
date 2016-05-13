@@ -79,7 +79,6 @@ COPY ["first_time_executing.py", "/opt/seafile/seafile-server-${SEAFILE_VERSION}
 COPY seahub-customization/custom-template /opt/seafile/seahub-data/custom
 COPY seahub-customization/media /opt/seafile/seahub-data/media
 COPY dnsmasq.conf /etc/dnsmasq.d/
-COPY netrc /root/.netrc
 COPY dev-scripts/* /usr/bin/
 COPY ["seahub-customization/django", "/opt/seafile/seafile-server-${SEAFILE_VERSION}/seahub/eyeos"]
 COPY seahub-customization/domain_controller.py /
