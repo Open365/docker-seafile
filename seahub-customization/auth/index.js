@@ -205,14 +205,10 @@ RequestParser.prototype.getSignature = function(request, signatureType) {
 };
 
 var RsaVerifier = function(publicPem) {
-	if(settings.keys.version == 1){
+	if (settings.keys.publicPem === "" && !publicPem){
+		console.log("Incorrect public key, please provide a valid one.");
+	} else {
 		this.publicPem = publicPem || new Buffer(settings.keys.publicPem, 'base64').toString("utf-8");
-	} else if(settings.keys.version == 2) {
-		if (settings.keys.publicPem === "" && !publicPem){
-			console.log("Incorrect public key, please provide a valid one.");
-		} else {
-			this.publicPem = publicPem || new Buffer(settings.keys.publicPem, 'base64').toString("utf-8");
-		}
 	}
 };
 
@@ -250,7 +246,6 @@ var settings = {
 		passcode: environment.EYEOS_BUS_MASTER_PASSWD || 'somepassword'
 	},
 	keys: {
-		version: environment.EYEOS_AUTH_KEY_VERSION || 1,
 		publicPem: environment.EYEOS_PUBLIC_PEM || ""
 	}
 };
