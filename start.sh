@@ -160,6 +160,7 @@ cat >> /opt/seafile/conf/seahub_settings.py <<-SEAHUB_SETTINGS
 	        'LOCATION': '$MEMCACHED_HOST:$MEMCACHED_PORT',
 	    }
 	}
+    LANGUAGE_CODE = '$SEAHUB_LANGUAGE'
 SEAHUB_SETTINGS
 
 if ! [ -d "$SEAFILE_DATA_FOLDER" ]
