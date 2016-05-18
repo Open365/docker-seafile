@@ -477,7 +477,7 @@
             cb(target);
         });
 
-        var config = { attributes: false, childList: true, characterData: true };
+        var config = { attributes: false, childList: true, characterData: true, subtree:true };
 
         observer.observe(target, config);
         return observer;
