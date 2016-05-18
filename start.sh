@@ -137,10 +137,6 @@ cat >> /opt/seafile/conf/seahub_settings.py <<-SEAHUB_SETTINGS
 
 	# Attempt limit before showing a captcha when login.
 	LOGIN_ATTEMPT_LIMIT = float('inf')
-	gettext_noop = lambda s: s
-	LANGUAGES = (
-    	('en', gettext_noop('English')),
-	)
 
 	# Enable or disable thumbnails
 	ENABLE_THUMBNAIL = True
