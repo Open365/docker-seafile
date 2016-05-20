@@ -157,6 +157,19 @@ cat >> /opt/seafile/conf/seahub_settings.py <<-SEAHUB_SETTINGS
 	    }
 	}
 	LANGUAGE_CODE = '$SEAHUB_LANGUAGE'
+
+	def string_to_bool(s):
+	    return str(s).lower() in ('true', 'yes', 'y', '1')
+
+	EMAIL_USE_TLS = string_to_bool(os.environ.get('SEAFILE_MAIL_USE_TLS', 'False'))
+	EMAIL_HOST = os.environ.get('SEAFILE_MAIL_HOST', 'mailserver.service.consul')
+	EMAIL_PORT = int(os.environ.get('SEAFILE_MAIL_PORT', '25'))
+	# email user & password have no sane defaults, should be passed always or
+	# else we will crash
+	EMAIL_HOST_USER = os.environ['SEAFILE_MAIL_NOREPLY_USER']
+	EMAIL_HOST_PASSWORD = os.environ['SEAFILE_MAIL_NOREPLY_PASSWORD']
+	DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+	SERVER_EMAIL = EMAIL_HOST_USER
 SEAHUB_SETTINGS
 
 if ! [ -d "$SEAFILE_DATA_FOLDER" ]
