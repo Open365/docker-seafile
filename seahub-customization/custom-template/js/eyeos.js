@@ -62,6 +62,7 @@
     modifyPage();
     moveUserQuotaUnderLeftPanel();
     listenChangePasswordEvent();
+    modifyUrlDownloadClient();
 
    
     if ("onhashchange" in window) {
@@ -515,4 +516,47 @@
             elem.removeClass('fleft');
         }, 500, 10000);
     }
+
+    function modifyUrlDownloadClient() {
+        if (getValueLocalStorage('localization_download_client_active') === "true") {
+            var url = getUrlDownloadClient();
+            if (url) {
+                $('#footer a:first').attr("href", url);
+            }
+        }
+    }
+
+    function getUrlDownloadClient() {
+        var userLang = getUserLanguage();
+        var url = getValueLocalStorage('url_download_client');
+        if (userLang === 'es') {
+            var slashLast = url.lastIndexOf('/');
+            var pathname = url.substr(slashLast);
+            var host = url.substr(0, slashLast + 1);
+            url = host + userLang + pathname;
+        }
+        return url;
+    }
+
+    function getUserLanguage() {
+        var lang = "en";
+        var itemUserInfo = getValueLocalStorage('userInfo');
+        if (itemUserInfo) {
+            var jsonUserInfo = JSON.parse(itemUserInfo);
+            if ( jsonUserInfo && jsonUserInfo.hasOwnProperty("lang")) {
+                lang = jsonUserInfo.lang;
+            }
+        }
+        return lang;
+    }
+
+    function getValueLocalStorage(key) {
+        var resultLocalStorage = null;
+        var valueKey = window.localStorage.getItem(key);
+        if (valueKey) {
+            resultLocalStorage = valueKey
+        }
+        return resultLocalStorage;
+    }
+
 })();
