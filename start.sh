@@ -81,6 +81,18 @@ cp -f /domain_controller.py "$SEAFILE_SERVER_LATEST_FOLDER/seahub/thirdpart/wsgi
 cp -f /seafdav.conf /opt/seafile/conf/seafdav.conf
 
 
+# this cannot be done when building the image because it is depending on some
+# runtime variables and to have seafile already set up. Also, we do this in a
+# subshell so as to not affect the environment for the rest of the script.
+(
+	cd "$SEAFILE_SERVER_LATEST_FOLDER/seahub"
+	export PYTHONPATH=$PWD/../seafile/lib64/python2.6/site-packages:$PWD/thirdpart:$PWD
+	export PATH=$PATH:thirdpart/Django-1.5.12-py2.6.egg/django/bin
+	export CCNET_CONF_DIR=$PWD/../../conf
+	export SEAFILE_CONF_DIR="$CCNET_CONF_DIR"
+	make statici18n collectstatic
+)
+
 # set number of seahub workers (3 by default)
 SEAHUB_WORKERS="${SEAHUB_WORKERS:-3}"
 sed -i 's@^\s*workers\s*=.*@workers = '"$SEAHUB_WORKERS"'@g' "$SEAFILE_SERVER_LATEST_FOLDER/runtime/seahub.conf"
