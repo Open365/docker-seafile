@@ -318,6 +318,11 @@ pre, code {
     word-wrap:break-word;
 }
 
+.icon-sync-problem,
+.icon-sync-problem:hover {
+    color: #C00;
+}
+
 .op-icon.sf2-x,
 .op-icon.sf2-x:hover {
     color: #4BC8E7;
