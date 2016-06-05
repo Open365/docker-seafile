@@ -442,7 +442,7 @@ pre, code {
 }
 
 #msg-count #notice-popup .outer-caret {
-    left:200px;
+    left: 105px;
 }
 
 #msg-count .up-outer-caret {
@@ -697,4 +697,8 @@ html, body {
 
 #quota-bar {
     border-radius: 0;
+}
+
+#notice-popup {
+    right: 100px !important;
 }
