@@ -611,13 +611,17 @@ html, body {
     height: 17px;
 }
 
-.icon-plus-square:before {
+.repo-share-btn:before, .icon-plus-square:before {
     font-family: 'eyeos-symbols';
     content: "\0061";
     font-size: 23px;
     margin-right: 5px;
     color: #4BC8E7;
     line-height: 15px;
+}
+
+.repo-share-btn img {
+    display: none;
 }
 
 .icon-upload-alt:before {
