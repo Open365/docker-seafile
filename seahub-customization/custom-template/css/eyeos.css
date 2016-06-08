@@ -39,6 +39,14 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'eyeos-symbols';
+    src: url('../fonts/eyeossymbols-regular-webfont.woff2') format('woff2');
+    src: url('../fonts/eyeossymbols-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /******* seafile header in Open365 ********/
 
 #header {
@@ -434,7 +442,7 @@ pre, code {
 }
 
 #msg-count #notice-popup .outer-caret {
-    left:200px;
+    left: 105px;
 }
 
 #msg-count .up-outer-caret {
@@ -528,4 +536,169 @@ pre, code {
 .obv-btn {
     background: #4BC8E7;
     border: 1px solid #4BC8E7;
+}
+
+/**************************************/
+html, body {
+    height: 100%;
+}
+
+#wrapper {
+    height: 100%;
+}
+
+#main {
+    margin-top: 0;
+    height: 100%;
+}
+
+#left-panel {
+    padding-top: 20px;
+    height: calc(100% - 20px);
+    background-color: #f5f6f7;
+    margin-left: 0;
+    padding-left: 25px;
+    border-right: solid 1px #cacfc9;
+    width: 181px;
+    padding-right: 25px;
+    float: left
+}
+
+#right-panel {
+    padding-top: 20px;
+    height: calc(100% - 20px);
+}
+
+#right-panel .hd {
+    background: #fff;
+    border-bottom: solid 1px #cacfc9;
+    border-radius: 0;
+}
+
+#dir-view .repo-op .op-btn {
+    padding: 5px 14px;
+}
+
+.side-tabnav {
+    margin-bottom: 30px;
+}
+
+.side-tabnav-tabs {
+    margin-left: 14px;
+}
+
+.side-tabnav-tabs .tab {
+    border-radius: 0;
+}
+
+.side-tabnav-tabs .tab [class^="sf2-icon-"] {
+    display: none;
+}
+
+.side-tabnav-tabs .tab a {
+    padding-left: 10px;
+}
+
+#upload-file, button {
+    border: 2px solid #4BC8E7;
+    border-radius: 0;
+    padding: 0px 12px;
+}
+
+#upload-file {
+    height: 15px;
+}
+
+.icon-plus-square:before {
+    font-family: 'eyeos-symbols';
+    content: "\0061";
+    font-size: 23px;
+    margin-right: 5px;
+    color: #4BC8E7;
+    line-height: 15px;
+}
+
+.icon-upload-alt:before {
+    font-size: 15px;
+    margin-right: 5px;
+    color: #4BC8E7;
+}
+
+#footer {
+    visibility: hidden;
+}
+
+#footer .innerfooter .items.fleft .item:first-child {
+    position: fixed;
+    visibility: visible;
+    left: 25px;
+    bottom: 70px;
+    padding: 5px 20px;
+    background-color: #e7e9ee;
+    width: 143px;
+    color: #333;
+    font-size: 15px;
+    text-align: center;
+}
+
+#footer .innerfooter .items.fleft .item:first-child a{
+    color: #333;
+    text-decoration: none;
+}
+
+#footer .innerfooter .items.fleft .item:first-child a::before {
+    font-family: 'eyeos-symbols';
+    content: "\00f1";
+    font-size: 39px;
+    color: #333;
+    line-height: 0;
+    margin-right: 5px;
+}
+
+#msg-count {
+    position: absolute;
+    visibility: visible;
+    left: 25px;
+    bottom: 20px;
+    padding: 5px 20px;
+    font-size: 15px;
+    background-color: white;
+    width: 143px;
+    text-align: center;
+    margin: 0;
+}
+
+.sf2-icon-bell::before {
+    font-family: 'eyeos-symbols';
+    content: "\00c4";
+    font-size: 39px;
+    color: #333;
+    line-height: 0;
+    margin-right: 5px;
+}
+
+.sf2-icon-bell::after {
+    color: #333;
+    content: "Notifications";
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 15px;
+    line-height: 22px;
+}
+
+#msg-count .num {
+    left: 28px;
+}
+
+#dir-view .repo-op {
+    background: #fff;
+    border-bottom: solid 1px #cacfc9;
+    border-radius: 0;
+}
+
+#quota-bar {
+    border-radius: 0;
+}
+
+#notice-popup {
+    right: 100px !important;
 }
