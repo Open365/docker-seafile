@@ -503,14 +503,7 @@ pre, code {
     width:100%;
 }
 
-#left-panel {
-    float:left;
-    width:200px;
-    margin-left:25px;
-}
-
 #right-panel {
-    margin-right:20px;
     width: calc(100% - 273px);
 }
 
