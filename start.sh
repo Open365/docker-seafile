@@ -98,9 +98,6 @@ fi
 SEAHUB_WORKERS="${SEAHUB_WORKERS:-3}"
 sed -i 's@^\s*workers\s*=.*@workers = '"$SEAHUB_WORKERS"'@g' "$SEAFILE_SERVER_LATEST_FOLDER/runtime/seahub.conf"
 
-# Reduce the throttle rate.
-sed -i 's/\/minute/00\/second/' $SEAFILE_SERVER_LATEST_FOLDER/seahub/seahub/settings.py
-
 # Disable transfer-owner endpoints and the buttons from the templates
 sed -i '/repo_transfer_owner/s/^/#/' $SEAFILE_SERVER_LATEST_FOLDER/seahub/seahub/urls.py
 sed -i '/repo_transfer_owner/d' $SEAFILE_SERVER_LATEST_FOLDER/seahub/seahub/templates/*.html
