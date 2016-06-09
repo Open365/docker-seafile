@@ -225,6 +225,9 @@ else
 	SEAFILE_FASTCGI_HOST=0.0.0.0 "$SEAFILE_SERVER_LATEST_FOLDER/seahub.sh" start
 fi
 
+# Starting seafdav!!
+$SEAFILE_SERVER_LATEST_FOLDER/seafdav.sh start &
+
 eyeos-service-ready-notify-cli &
 
 # this runs all /etc/service/*/run scripts, taken from https://github.com/JensErat/docker-seafile
