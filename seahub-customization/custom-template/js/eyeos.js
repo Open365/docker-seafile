@@ -314,7 +314,8 @@
     }
 
 
-    function openLinkInEyeosDesktop(aLink) {
+    function openLinkInEyeosDesktop(aLink, libraryName) {
+        libraryName = libraryName || currentLibraryName;
         var filePath = getEyeosPathFromHref(aLink);
         var ext = filePath.split('.').pop().toLowerCase();
         if(!openInEyeosExtensions[ext]){
@@ -323,7 +324,7 @@
         aLink.onclick=function(e){
             e.preventDefault();
             e.stopPropagation();
-            sendOpenFileToDesktop(currentLibraryName + filePath);
+            sendOpenFileToDesktop(libraryName + filePath);
         }
     }
 
