@@ -203,12 +203,6 @@ echo "seafile installed. Now let's start it and create the admin user"
 echo "start seafile itself"
 "$SEAFILE_SERVER_LATEST_FOLDER/seafile.sh" start
 
-# now we link some static folders to the folder where the volume is exposed
-ln -sf $SEAFILE_SERVER_LATEST_FOLDER/seahub/media /usr/share/nginx/html/seafmedia/media
-# FIXME: VHANDA!!
-#ln -sf /opt/seafile/seahub-data/avatars /usr/share/nginx/html/seafmedia/avatars
-#ln -sf /opt/seafile/seahub-data/custom /usr/share/nginx/html/seafmedia/custom
-
 # now start seahub, creating the admin user if it's the first time running
 if [ "$FIRST_TIME" = 1 ]
 then

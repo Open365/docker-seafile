@@ -70,11 +70,3 @@ RUN chmod +x ${INSTALLATION_DIR}/start.sh /etc/service/seafile/run /etc/service/
 COPY default-library-files/* ${SEAFILE_BASE}/seafile/docs/
 
 CMD eyeos-run-server --serf ${INSTALLATION_DIR}/start.sh
-
-ENV MediaDir /usr/share/nginx/html/seafmedia
-
-RUN mkdir -p ${MediaDir}
-
-VOLUME ${MediaDir}
-VOLUME /opt/seafile
-# vHanda: Why is this a volume?
