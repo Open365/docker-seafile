@@ -67,9 +67,7 @@ RUN  cd /opt/auth && npm install
 RUN chmod +x ${INSTALLATION_DIR}/start.sh /etc/service/seafile/run /etc/service/seahub/run
 
 # put files for new users in the default library
-# vHanda: FIXME!!
-# RUN rm -rf ${SEAFILE_BASE_DIR}/seafile/docs/*
-# COPY default-library-files/* /opt/seafile/seafile-server-${SEAFILE_VERSION}/seafile/docs/
+COPY default-library-files/* ${SEAFILE_BASE}/seafile/docs/
 
 CMD eyeos-run-server --serf ${INSTALLATION_DIR}/start.sh
 
