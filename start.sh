@@ -3,7 +3,8 @@ set -e
 set -x
 set -o pipefail
 
-SEAFILE_SERVER_LATEST_FOLDER=/opt/seafile/seafile-server-latest
+SEAFILE_BASE_DIR=/var/lib/seafile/default
+SEAFILE_SERVER_LATEST_FOLDER=$SEAFILE_BASE_DIR/scripts
 
 export LC_ALL=en_US.utf8
 
@@ -11,7 +12,7 @@ SEAFILE_DATA_FOLDER=/opt/seafile/seafile-data
 SEAFILE_DATA_FOLDER_TMP="$SEAFILE_DATA_FOLDER"-tmp
 
 #Create databases on remote mysql. Only the first time executed
-cd /opt/seafile/seafile-server-${SEAFILE_VERSION}
+cd $SEAFILE_SERVER_LATEST_FOLDER
 
 if ./first_time_executing.py
 then
@@ -22,11 +23,11 @@ fi
 
 cd -
 
-# /opt/seafile/ccnet is generated after executing setup-seafile-mysql.sh.
+# This file is generated after executing setup-seafile-mysql.sh.
 # if we restart the container (or docker-compose restarts it because it fails)
 # this folder will already exist. And when trying to execute the setup it will
 # complain about it. So only do the setup if this folder does not exist.
-if ! [ -d /opt/seafile/ccnet ]
+if ! [ -d $SEAFILE_BASE_DIR/ccnet ]
 then
 	(
 		# acknowledge initial message
@@ -53,7 +54,7 @@ then
 		# host of mysql server
 		echo mysql.service.consul
 		# host allowed to connect to mysql
-		echo '%'
+		# echo '%'
 		# port of mysql server
 		echo 3306
 		if [ "$FIRST_TIME" = 1 ]
@@ -74,11 +75,12 @@ then
 		# configuration done, acknowledge review of configuration
 		echo
 		# all done
-	) | /opt/seafile/seafile-server-${SEAFILE_VERSION}/setup-seafile-mysql.sh
+	) | ${SEAFILE_SERVER_LATEST_FOLDER}/setup-seafile-mysql.sh
 fi
 
-cp -f /domain_controller.py "$SEAFILE_SERVER_LATEST_FOLDER/seahub/thirdpart/wsgidav/addons/seafile/domain_controller.py"
-cp -f /seafdav.conf /opt/seafile/conf/seafdav.conf
+# vhanda: FIXME seafdav!!
+#cp -f /domain_controller.py "$SEAFILE_SERVER_LATEST_FOLDER/seahub/thirdpart/wsgidav/addons/seafile/domain_controller.py"
+#cp -f /seafdav.conf /opt/seafile/conf/seafdav.conf
 
 
 # this cannot be done when building the image because it is depending on some
@@ -110,19 +112,20 @@ then
 fi
 
 # Now we change to the default correct folder set in docker volume
-find /opt/seafile/conf /opt/seafile/ccnet -maxdepth 1 -type f -print0 \
+find $SEAFILE_BASE_DIR/conf $SEAFILE_BASE_DIR/ccnet -maxdepth 1 -type f -print0 \
 	| xargs -r -0 sed -i 's@'"$SEAFILE_DATA_FOLDER_TMP"'@'"$SEAFILE_DATA_FOLDER"'@g'
 
 # Seahub customization
 cd "$SEAFILE_SERVER_LATEST_FOLDER/seahub/media"
-ln -sf ../../../seahub-data/custom .
-cp -a ../../../seahub-data/media/. .
+ln -sf /opt/seafile/seahub-data/custom .
+cp -a /opt/seafile/seahub-data/media/. .
 cd -
 
-sed -i "/BRANDING_CSS/d" /opt/seafile/conf/seahub_settings.py
-sed -i "$ a BRANDING_CSS = 'custom/css/eyeos.css'" /opt/seafile/conf/seahub_settings.py
+CONF_DIR="$SEAFILE_BASE_DIR/conf"
+sed -i "/BRANDING_CSS/d" $CONF_DIR/seahub_settings.py
+sed -i "$ a BRANDING_CSS = 'custom/css/eyeos.css'" $CONF_DIR/seahub_settings.py
 
-sed -i -r 's@^SERVICE_URL = http(.*):8000$@SERVICE_URL = https\1/sync@g' /opt/seafile/conf/ccnet.conf
+sed -i -r 's@^SERVICE_URL = http(.*):8000$@SERVICE_URL = https\1/sync@g' $CONF_DIR/ccnet.conf
 sed -i "s@INNER_FILE_SERVER_ROOT = 'http://127.0.0.1:' + FILE_SERVER_PORT@INNER_FILE_SERVER_ROOT = 'http://0.0.0.0:' + FILE_SERVER_PORT@g" \
     "$SEAFILE_SERVER_LATEST_FOLDER/seahub/seahub/settings.py"
 
@@ -138,10 +141,10 @@ echo "import os" >> /tmp/newfile
 echo "FILE_SERVER_ROOT = os.environ.get('FILE_SERVER_ROOT', 'https://127.0.0.1')" >> /tmp/newfile
 echo "FILE_SERVER_PORT = os.environ.get('FILE_SERVER_PORT','8082')" >> /tmp/newfile
 
-cat /opt/seafile/conf/seahub_settings.py >> /tmp/newfile
-mv /tmp/newfile /opt/seafile/conf/seahub_settings.py
+cat $CONF_DIR/seahub_settings.py >> /tmp/newfile
+mv /tmp/newfile $CONF_DIR/seahub_settings.py
 
-cat >> /opt/seafile/conf/seahub_settings.py <<-SEAHUB_SETTINGS
+cat >> $CONF_DIR/seahub_settings.py <<-SEAHUB_SETTINGS
 	AUTHENTICATION_BACKENDS = (
 		'eyeos.auth.EyeosCardAuthBackend',
 		'seahub.base.accounts.AuthBackend'
@@ -191,20 +194,21 @@ fi
 
 if [ "$FIRST_TIME" = 1 ]
 then
-	cp -a "$SEAFILE_DATA_FOLDER_TMP/." "$SEAFILE_DATA_FOLDER"
+	cp -a "$SEAFILE_DATA_FOLDER_TMP/." "$SEAFILE_DATA_FOLDER" || true
 	rm -rf "$SEAFILE_DATA_FOLDER_TMP"
 fi
 
-echo -e "\n[quota]\ndefault = $SEAFILE_QUOTA\n" >> /opt/seafile/conf/seafile.conf
+echo -e "\n[quota]\ndefault = $SEAFILE_QUOTA\n" >> $CONF_DIR/seafile.conf
 
 echo "seafile installed. Now let's start it and create the admin user"
 echo "start seafile itself"
 "$SEAFILE_SERVER_LATEST_FOLDER/seafile.sh" start
 
 # now we link some static folders to the folder where the volume is exposed
-ln -sf /opt/seafile/seafile-server-5.0.5/seahub/media /usr/share/nginx/html/seafmedia/media
-ln -sf /opt/seafile/seahub-data/avatars /usr/share/nginx/html/seafmedia/avatars
-ln -sf /opt/seafile/seahub-data/custom /usr/share/nginx/html/seafmedia/custom
+ln -sf $SEAFILE_SERVER_LATEST_FOLDER/seahub/media /usr/share/nginx/html/seafmedia/media
+# FIXME: VHANDA!!
+#ln -sf /opt/seafile/seahub-data/avatars /usr/share/nginx/html/seafmedia/avatars
+#ln -sf /opt/seafile/seahub-data/custom /usr/share/nginx/html/seafmedia/custom
 
 # now start seahub, creating the admin user if it's the first time running
 if [ "$FIRST_TIME" = 1 ]

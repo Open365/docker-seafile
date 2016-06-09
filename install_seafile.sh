@@ -3,7 +3,7 @@ set -e
 set -x
 set -o pipefail
 
-SEAFILE_DIR="/opt/seafile/seafile-server-${SEAFILE_VERSION}"
+SEAFILE_DIR='/var/lib/seafile/default/scripts'
 SEAHUB_DIR="$SEAFILE_DIR/seahub"
 
 # backup original seahub's thirdpart folder, because the github clone doesn't
@@ -42,6 +42,9 @@ patch -p2 -d "$SEAFILE_DIR" -i /opt/patches/seafile/mysql_remote_host.patch
 # see https://github.com/haiwen/seafile/pull/1556
 patch -p2 -d "$SEAFILE_DIR" -i /opt/patches/seafile/use_existing_db.patch
 
-    # Custom patches in seafdav
-patch -d "$SEAHUB_DIR"/thirdpart/ -p1 -i /opt/patches/seafdav/0001-wsgiServer-Reduce-the-socket-poll-time.patch
-patch -d "$SEAHUB_DIR"/thirdpart/ -p1 -i /opt/patches/seafdav/0002-Make-the-webdav-server-scale-better.patch
+# Use seafdav from github
+cd /opt/
+git clone https://github.com/Open365/seafdav.git --depth 1 --branch open365
+rm -rf /usr/share/seafdav
+cp -rf /opt/seafdav /usr/share/seafdav
+rm -rf /opt/seafdav
