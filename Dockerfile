@@ -28,8 +28,6 @@ RUN \
 		memcached \
 		patch
 
-#RUN pip install python-memcached
-
 RUN npm install -g eyeos-service-ready-notify-cli
 
 COPY x86_64 /root/

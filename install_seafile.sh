@@ -25,12 +25,12 @@ mv /tmp/thirdpart "$SEAHUB_DIR/thirdpart"
 # setting up seafile, because it depends on ccnet's config and some envars.
 (
 	cd "$SEAHUB_DIR"
-	apt-get install -y gettext
+	apk add gettext
 	npm install --global requirejs
 	export PYTHONPATH=$PWD/../seafile/lib64/python2.6/site-packages:$PWD/thirdpart:$PWD
 	export PATH=$PATH:thirdpart/Django-1.5.12-py2.6.egg/django/bin
 	make locale uglify
-	apt-get autoremove -y gettext
+	#apt-get autoremove -y gettext
 )
 
 # This is a temporary patch. We use this for allow remote connections of mysql.
