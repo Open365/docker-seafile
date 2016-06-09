@@ -58,8 +58,7 @@ COPY [ \
 	"add_django_debug.txt", \
 	"${INSTALLATION_DIR}" \
 ]
-#COPY seafdav.conf /opt/seafile/conf/seafdav.conf
-#COPY seafdav.conf /seafdav.conf
+COPY seafdav.conf /seafdav.conf
 
 COPY seahub-customization/auth /opt/auth
 RUN  cd /opt/auth && npm install

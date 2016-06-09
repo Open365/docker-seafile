@@ -78,10 +78,6 @@ then
 	) | ${SEAFILE_SERVER_LATEST_FOLDER}/setup-seafile-mysql.sh
 fi
 
-# vhanda: FIXME seafdav conf
-#cp -f /seafdav.conf /opt/seafile/conf/seafdav.conf
-
-
 # this cannot be done when building the image because it is depending on some
 # runtime variables and to have seafile already set up. Also, we do this in a
 # subshell so as to not affect the environment for the rest of the script.
@@ -217,6 +213,9 @@ else
 fi
 
 # Starting seafdav!!
+cp -f /seafdav.conf /var/lib/seafile/default/conf/seafdav.conf
+
+export SEAFDAV_CONF=/var/lib/seafile/default/conf/seafdav.conf
 $SEAFILE_SERVER_LATEST_FOLDER/seafdav.sh start &
 
 eyeos-service-ready-notify-cli &
