@@ -52,7 +52,6 @@ ENV SEAFILE_BASE /var/lib/seafile/default/scripts
 COPY ["first_time_executing.py", "${SEAFILE_BASE}/first_time_executing.py"]
 COPY seahub-customization/custom-template /opt/seafile/seahub-data/custom
 COPY seahub-customization/media /opt/seafile/seahub-data/media
-COPY dev-scripts/* /usr/bin/
 COPY ["seahub-customization/django", "${SEAFILE_BASE}/seahub/eyeos"]
 COPY [ \
 	"start.sh", \
