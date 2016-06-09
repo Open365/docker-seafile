@@ -78,8 +78,7 @@ then
 	) | ${SEAFILE_SERVER_LATEST_FOLDER}/setup-seafile-mysql.sh
 fi
 
-# vhanda: FIXME seafdav!!
-#cp -f /domain_controller.py "$SEAFILE_SERVER_LATEST_FOLDER/seahub/thirdpart/wsgidav/addons/seafile/domain_controller.py"
+# vhanda: FIXME seafdav conf
 #cp -f /seafdav.conf /opt/seafile/conf/seafdav.conf
 
 

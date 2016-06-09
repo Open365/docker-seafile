@@ -53,7 +53,6 @@ COPY seahub-customization/custom-template /opt/seafile/seahub-data/custom
 COPY seahub-customization/media /opt/seafile/seahub-data/media
 COPY dev-scripts/* /usr/bin/
 COPY ["seahub-customization/django", "${SEAFILE_BASE}/seahub/eyeos"]
-COPY seahub-customization/domain_controller.py /
 COPY [ \
 	"start.sh", \
 	"add_django_debug.txt", \
