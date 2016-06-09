@@ -38,6 +38,9 @@ RUN apk add --update --allow-untrusted /root/*.apk
 # vHanda: Temporary until we patch out this requirement!
 RUN cp /var/lib/seafile/default/scripts/seahub.conf /var/lib/seafile/default/scripts/runtime/seahub.conf
 
+RUN chmod +x ${INSTALLATION_DIR}/install_seafile.sh && \
+	${INSTALLATION_DIR}/install_seafile.sh
+
 VOLUME [ "/opt/seafile/seafile-data" ]
 
 # vHanda: How do we translate this into alpine?

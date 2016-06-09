@@ -54,7 +54,7 @@ then
 		# host of mysql server
 		echo mysql.service.consul
 		# host allowed to connect to mysql
-		# echo '%'
+		echo '%'
 		# port of mysql server
 		echo 3306
 		if [ "$FIRST_TIME" = 1 ]
