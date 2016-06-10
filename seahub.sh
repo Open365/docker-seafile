@@ -8,13 +8,6 @@ function stop_server() {
 
 trap stop_server SIGINT SIGTERM
 
-#if [[ "${fastcgi}" =~ [Tt]rue ]]
-#then
-#	SEAFILE_FASTCGI_HOST='0.0.0.0' /opt/seafile/seafile-server-latest/seahub.sh start-fastcgi >> $log
-#else
-#	/opt/seafile/seafile-server-latest/seahub.sh start >> $log 2>&1
-#fi
-
 echo "****** STARTING SEAHUB ******"
 
 /opt/seafile/seafile-server-latest/seahub.sh start # >> $log 2>&1

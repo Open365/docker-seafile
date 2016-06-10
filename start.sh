@@ -207,9 +207,9 @@ then
 		echo ${SEAFILE_ADMIN_PASSWORD}
 		# admin pass again
 		echo ${SEAFILE_ADMIN_PASSWORD}
-	) | SEAFILE_FASTCGI_HOST=0.0.0.0 "$SEAFILE_SERVER_LATEST_FOLDER/seahub.sh" start
+	) | "$SEAFILE_SERVER_LATEST_FOLDER/seahub.sh" start
 else
-	SEAFILE_FASTCGI_HOST=0.0.0.0 "$SEAFILE_SERVER_LATEST_FOLDER/seahub.sh" start
+	"$SEAFILE_SERVER_LATEST_FOLDER/seahub.sh" start
 fi
 
 # Starting seafdav!!
