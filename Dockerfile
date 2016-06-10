@@ -13,14 +13,6 @@ ENV SEAFILE_QUOTA 2
 
 EXPOSE 10001 12001 8000 8080 8082
 
-
-COPY [ \
-	"install_seafile.sh", \
-	"package.json", \
-	"${INSTALLATION_DIR}" \
-]
-COPY patches /opt/patches
-
 RUN \
 	apk add --update --no-cache \
 		build-base \
@@ -33,13 +25,17 @@ RUN npm install -g eyeos-service-ready-notify-cli
 COPY x86_64 /root/
 RUN apk add --update --allow-untrusted /root/*.apk
 
-# vHanda: Temporary until we patch out this requirement!
-RUN cp /var/lib/seafile/scripts/seahub.conf /var/lib/seafile/scripts/runtime/seahub.conf
+COPY [ \
+	"install_seafile.sh", \
+	"install_seahub.sh", \
+	"package.json", \
+	"${INSTALLATION_DIR}" \
+]
+COPY patches /opt/patches
 
-RUN chmod +x ${INSTALLATION_DIR}/install_seafile.sh && \
-	${INSTALLATION_DIR}/install_seafile.sh
+RUN ${INSTALLATION_DIR}/install_seafile.sh
 
-VOLUME [ "/opt/seafile/seafile-data" ]
+VOLUME /opt/seafile/seafile-data
 
 ENV SEAFILE_BASE /var/lib/seafile/scripts
 
