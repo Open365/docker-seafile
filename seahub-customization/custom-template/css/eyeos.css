@@ -503,14 +503,7 @@ pre, code {
     width:100%;
 }
 
-#left-panel {
-    float:left;
-    width:200px;
-    margin-left:25px;
-}
-
 #right-panel {
-    margin-right:20px;
     width: calc(100% - 273px);
 }
 
@@ -567,6 +560,9 @@ html, body {
 #right-panel {
     padding-top: 20px;
     height: calc(100% - 20px);
+    overflow: auto;
+    margin-right: 0;
+    padding-right: 20px;
 }
 
 #right-panel .hd {
@@ -600,22 +596,25 @@ html, body {
 }
 
 #upload-file, button {
-    border: 2px solid #4BC8E7;
     border-radius: 0;
     padding: 0px 12px;
 }
 
 #upload-file {
-    height: 15px;
+    height: 17px;
 }
 
-.icon-plus-square:before {
+.repo-share-btn:before, .icon-plus-square:before {
     font-family: 'eyeos-symbols';
     content: "\0061";
     font-size: 23px;
     margin-right: 5px;
     color: #4BC8E7;
     line-height: 15px;
+}
+
+.repo-share-btn img {
+    display: none;
 }
 
 .icon-upload-alt:before {
@@ -656,7 +655,7 @@ html, body {
 }
 
 #msg-count {
-    position: absolute;
+    position: fixed;
     visibility: visible;
     left: 25px;
     bottom: 20px;
