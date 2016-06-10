@@ -3,7 +3,7 @@ set -e
 set -x
 set -o pipefail
 
-SEAFILE_DIR='/var/lib/seafile/default/scripts'
+SEAFILE_DIR='/var/lib/seafile/scripts'
 SEAHUB_DIR="$SEAFILE_DIR/seahub"
 
 # backup original seahub's thirdpart folder, because the github clone doesn't

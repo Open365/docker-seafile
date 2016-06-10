@@ -3,7 +3,7 @@ set -e
 set -x
 set -o pipefail
 
-SEAFILE_BASE_DIR=/var/lib/seafile/default
+SEAFILE_BASE_DIR=/var/lib/seafile
 SEAFILE_SERVER_LATEST_FOLDER=$SEAFILE_BASE_DIR/scripts
 
 export LC_ALL=en_US.utf8
@@ -213,9 +213,9 @@ else
 fi
 
 # Starting seafdav!!
-cp -f /seafdav.conf /var/lib/seafile/default/conf/seafdav.conf
+cp -f /seafdav.conf /var/lib/seafile/conf/seafdav.conf
 
-export SEAFDAV_CONF=/var/lib/seafile/default/conf/seafdav.conf
+export SEAFDAV_CONF=/var/lib/seafile/conf/seafdav.conf
 $SEAFILE_SERVER_LATEST_FOLDER/seafdav.sh start &
 
 eyeos-service-ready-notify-cli &
