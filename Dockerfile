@@ -41,12 +41,6 @@ RUN chmod +x ${INSTALLATION_DIR}/install_seafile.sh && \
 
 VOLUME [ "/opt/seafile/seafile-data" ]
 
-# vHanda: How do we translate this into alpine?
-RUN mkdir -p /etc/service/seafile /etc/service/seahub /etc/service/memcached
-COPY seafile.sh /etc/service/seafile/run
-COPY seahub.sh /etc/service/seahub/run
-COPY memcached.sh /etc/service/memcached/run
-
 ENV SEAFILE_BASE /var/lib/seafile/default/scripts
 
 COPY ["first_time_executing.py", "${SEAFILE_BASE}/first_time_executing.py"]
@@ -63,7 +57,7 @@ COPY seafdav.conf /seafdav.conf
 COPY seahub-customization/auth /opt/auth
 RUN  cd /opt/auth && npm install
 
-RUN chmod +x ${INSTALLATION_DIR}/start.sh /etc/service/seafile/run /etc/service/seahub/run
+RUN chmod +x ${INSTALLATION_DIR}/start.sh
 
 # put files for new users in the default library
 COPY default-library-files/* ${SEAFILE_BASE}/seafile/docs/
