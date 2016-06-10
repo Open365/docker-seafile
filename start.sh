@@ -220,5 +220,4 @@ $SEAFILE_SERVER_LATEST_FOLDER/seafdav.sh start &
 
 eyeos-service-ready-notify-cli &
 
-# this runs all /etc/service/*/run scripts, taken from https://github.com/JensErat/docker-seafile
-/sbin/my_init
+/usr/bin/memcached -u root -m "${MEMCACHED_MEMORY}" >> /var/log/memcached.log 2>&1 &
