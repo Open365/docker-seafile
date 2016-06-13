@@ -4,9 +4,9 @@ set -x
 set -o pipefail
 
 apk add --no-cache bash \
-	 py-dateutil py-mako py-simplejson py-pillow py-pip py-virtualenv py-six python-dev \
-	 python py-django1.5 py-gunicorn py-chardet py-django-djblets py-ccnet py-libsearpc \
-	 py-django-simple-captcha py-django-registration py-flup py-seafile seafile-server py-mysqldb
+	 py-dateutil py-mako py-simplejson py-pillow py-pip py-six python-dev \
+	 python py-django1.5 py-gunicorn py-chardet py-django-djblets \
+	 py-django-simple-captcha py-django-registration py-flup py-mysqldb gettext
 
 SEAFILE_HOME='/var/lib/seafile'
 SEAFILE_DIR="$SEAFILE_HOME/scripts"
@@ -32,12 +32,12 @@ cp $SEAFILE_HOME/scripts/seahub.conf $SEAFILE_HOME/scripts/runtime/seahub.conf
 # setting up seafile, because it depends on ccnet's config and some envars.
 (
 	cd "$SEAHUB_DIR"
-	apk add gettext
 	npm install --global requirejs
 	export PYTHONPATH=$PWD/../seafile/lib64/python2.6/site-packages:$PWD/thirdpart:$PWD
 	export PATH=$PATH:thirdpart/Django-1.5.12-py2.6.egg/django/bin
 	make locale uglify
-	#apt-get autoremove -y gettext
 )
 
 # FIXME: Move the runtime translation script over here!
+
+apk del python-dev gettext
