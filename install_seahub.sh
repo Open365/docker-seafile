@@ -41,4 +41,4 @@ cp $SEAFILE_HOME/scripts/seahub.conf $SEAFILE_HOME/scripts/runtime/seahub.conf
 
 # FIXME: Move the runtime translation script over here!
 
-apk del python-dev gettext
+apk del python-dev gettext gettext-dev glib-dev libsearpc-dev ccnet-dev seafile-dev
