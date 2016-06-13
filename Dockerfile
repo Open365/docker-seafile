@@ -57,7 +57,7 @@ COPY [ \
 ]
 COPY seafdav.conf /seafdav.conf
 
-COPY seahub-customization/auth /opt/auth
+COPY seafdav-customization/auth /opt/auth
 RUN  cd /opt/auth && npm install
 
 # put files for new users in the default library
