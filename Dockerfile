@@ -30,7 +30,6 @@ ENV CCNET_CONF_DIR /var/lib/seafile/ccnet
 ENV SEAFILE_CENTRAL_CONF_DIR /var/lib/seafile/conf
 ENV PYTHONPATH /var/lib/seafile/scripts/seahub/thirdpart:/usr/lib/python2.7/site-packages
 
-COPY x86_64 /root/
 RUN \
 	apk add --update --no-cache \
 		build-base \
@@ -38,9 +37,7 @@ RUN \
 		memcached \
 		patch && \
 	npm install -g eyeos-service-ready-notify-cli && \
-	apk add --update --allow-untrusted /root/*.apk && \
-	${INSTALLATION_DIR}/install_seafile.sh && \
-	rm /root/*.apk
+	${INSTALLATION_DIR}/install_seafile.sh
 
 VOLUME /opt/seafile/seafile-data
 
