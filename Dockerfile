@@ -61,8 +61,6 @@ COPY seafdav.conf /seafdav.conf
 COPY seahub-customization/auth /opt/auth
 RUN  cd /opt/auth && npm install
 
-RUN chmod +x ${INSTALLATION_DIR}/start.sh
-
 # put files for new users in the default library
 COPY default-library-files/* ${SEAFILE_BASE}/seafile/docs/
 
