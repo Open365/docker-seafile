@@ -48,8 +48,6 @@ VOLUME /opt/seafile/seafile-data
 ENV SEAFILE_BASE /var/lib/seafile/scripts
 
 COPY ["first_time_executing.py", "${SEAFILE_BASE}/first_time_executing.py"]
-COPY seahub-customization/custom-template /opt/seafile/seahub-data/custom
-COPY seahub-customization/media /opt/seafile/seahub-data/media
 COPY [ \
 	"start.sh", \
 	"add_django_debug.txt", \

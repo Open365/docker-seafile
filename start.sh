@@ -107,12 +107,6 @@ fi
 find $SEAFILE_BASE_DIR/conf $SEAFILE_BASE_DIR/ccnet -maxdepth 1 -type f -print0 \
 	| xargs -r -0 sed -i 's@'"$SEAFILE_DATA_FOLDER_TMP"'@'"$SEAFILE_DATA_FOLDER"'@g'
 
-# Seahub customization
-cd "$SEAFILE_SERVER_LATEST_FOLDER/seahub/media"
-ln -sf /opt/seafile/seahub-data/custom .
-cp -a /opt/seafile/seahub-data/media/. .
-cd -
-
 CONF_DIR="$SEAFILE_BASE_DIR/conf"
 sed -i "/BRANDING_CSS/d" $CONF_DIR/seahub_settings.py
 sed -i "$ a BRANDING_CSS = 'custom/css/eyeos.css'" $CONF_DIR/seahub_settings.py
