@@ -13,18 +13,6 @@ ENV SEAFILE_QUOTA 2
 
 EXPOSE 10001 12001 8000 8080 8082
 
-RUN \
-	apk add --update --no-cache \
-		build-base \
-		git \
-		memcached \
-		patch
-
-RUN npm install -g eyeos-service-ready-notify-cli
-
-COPY x86_64 /root/
-RUN apk add --update --allow-untrusted /root/*.apk
-
 COPY [ \
 	"install_seafile.sh", \
 	"install_seahub.sh", \
@@ -41,7 +29,17 @@ ENV CCNET_CONF_DIR /var/lib/seafile/ccnet
 ENV SEAFILE_CENTRAL_CONF_DIR /var/lib/seafile/conf
 ENV PYTHONPATH /var/lib/seafile/scripts/seahub/thirdpart:/usr/lib/python2.7/site-packages
 
-RUN ${INSTALLATION_DIR}/install_seafile.sh
+COPY x86_64 /root/
+RUN \
+	apk add --update --no-cache \
+		build-base \
+		git \
+		memcached \
+		patch && \
+	npm install -g eyeos-service-ready-notify-cli && \
+	apk add --update --allow-untrusted /root/*.apk && \
+	${INSTALLATION_DIR}/install_seafile.sh && \
+	rm /root/*.apk
 
 VOLUME /opt/seafile/seafile-data
 
