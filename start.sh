@@ -98,16 +98,16 @@ sed -i 's@^\s*workers\s*=.*@workers = '"$SEAHUB_WORKERS"'@g' "$SEAFILE_SERVER_LA
 sed -i '/repo_transfer_owner/s/^/#/' $SEAFILE_SERVER_LATEST_FOLDER/seahub/seahub/urls.py
 sed -i '/repo_transfer_owner/d' $SEAFILE_SERVER_LATEST_FOLDER/seahub/seahub/templates/*.html
 
+CONF_DIR="$SEAFILE_BASE_DIR/conf"
 if [ "$ENABLE_DJANGO_DEBUG" = 1 ]
 then
-	cat ${INSTALLATION_DIR}/add_django_debug.txt >> /opt/seafile/conf/seahub_settings.py
+	cat ${INSTALLATION_DIR}/add_django_debug.txt >> $CONF_DIR/seahub_settings.py
 fi
 
 # Now we change to the default correct folder set in docker volume
 find $SEAFILE_BASE_DIR/conf $SEAFILE_BASE_DIR/ccnet -maxdepth 1 -type f -print0 \
 	| xargs -r -0 sed -i 's@'"$SEAFILE_DATA_FOLDER_TMP"'@'"$SEAFILE_DATA_FOLDER"'@g'
 
-CONF_DIR="$SEAFILE_BASE_DIR/conf"
 sed -i "/BRANDING_CSS/d" $CONF_DIR/seahub_settings.py
 sed -i "$ a BRANDING_CSS = 'custom/css/eyeos.css'" $CONF_DIR/seahub_settings.py
 
