@@ -17,9 +17,4 @@ patch -p2 -d "$SEAFILE_DIR" -i /opt/patches/seafile/mysql_remote_host.patch
 # see https://github.com/haiwen/seafile/pull/1556
 patch -p2 -d "$SEAFILE_DIR" -i /opt/patches/seafile/use_existing_db.patch
 
-# Use seafdav from github
-cd /opt/
-git clone https://github.com/Open365/seafdav.git --depth 1 --branch open365
-rm -rf /usr/share/seafdav
-cp -rf /opt/seafdav/ /usr/share/seafdav/
-rm -rf /opt/seafdav
+/var/service/install_seafdav.sh

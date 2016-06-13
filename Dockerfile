@@ -16,6 +16,7 @@ EXPOSE 10001 12001 8000 8080 8082
 COPY [ \
 	"install_seafile.sh", \
 	"install_seahub.sh", \
+	"install_seafdav.sh", \
 	"package.json", \
 	"${INSTALLATION_DIR}" \
 ]
@@ -54,6 +55,7 @@ COPY [ \
 COPY seafdav.conf /seafdav.conf
 
 COPY seafdav-customization/auth /opt/auth
+COPY seafdav-customization/seafdav.sh ${SEAFILE_BASE}/seafdav.sh
 RUN  cd /opt/auth && npm install
 
 # put files for new users in the default library
