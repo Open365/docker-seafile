@@ -22,6 +22,7 @@ pip install -r requirements.txt
 
 mkdir -m 755 -p $SEAFILE_HOME/seafile-server
 ln -s $SEAFILE_DIR/seahub $SEAFILE_HOME/seafile-server
+ln -s $SEAFILE_DIR/seahub /var/lib/seahub
 
 mkdir -m 755 $SEAFILE_HOME/scripts/seafile
 mkdir -m 755 $SEAFILE_HOME/scripts/runtime
