@@ -33,6 +33,14 @@ COPY [ \
 ]
 COPY patches /opt/patches
 
+# These environment variables are used by seafile, seahub and seafdav
+# They aren't striclty required as the scripts set them, however, it is
+# super useful having them here as it makes development / debugging so much easier
+ENV SEAFILE_CONF_DIR /opt/seafile/seafile-data
+ENV CCNET_CONF_DIR /var/lib/seafile/ccnet
+ENV SEAFILE_CENTRAL_CONF_DIR /var/lib/seafile/conf
+ENV PYTHONPATH /var/lib/seafile/scripts/seahub/thirdpart:/usr/lib/python2.7/site-packages
+
 RUN ${INSTALLATION_DIR}/install_seafile.sh
 
 VOLUME /opt/seafile/seafile-data
