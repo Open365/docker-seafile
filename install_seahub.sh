@@ -28,15 +28,25 @@ mkdir -m 755 $SEAFILE_HOME/scripts/seafile
 mkdir -m 755 $SEAFILE_HOME/scripts/runtime
 cp $SEAFILE_HOME/scripts/seahub.conf $SEAFILE_HOME/scripts/runtime/seahub.conf
 
-# compile and minify seahub (translations and js). We cannot do 'make dist'
-# when building the image because there are some steps that must be done after
-# setting up seafile, because it depends on ccnet's config and some envars.
+# compile and minify seahub (translations and js).
 (
 	cd "$SEAHUB_DIR"
+	mkdir -p ${SEAFILE_HOME}/conf
+	cat <<-END >> ${SEAFILE_HOME}/conf/ccnet.conf
+	[General]
+	USER_NAME = open365_files
+	ID = bf8eec45344c4c37970e5ba6152fdc43e520d0e9
+	NAME = open365_files
+	SERVICE_URL = https://192.168.5.151/sync
+	END
+
 	npm install --global requirejs
-	export PYTHONPATH=$PWD/../seafile/lib64/python2.6/site-packages:$PWD/thirdpart:$PWD
+	export PYTHONPATH=$PWD/thirdpart:$PWD
 	export PATH=$PATH:thirdpart/Django-1.5.12-py2.6.egg/django/bin
-	make locale uglify
+	make dist
+	npm uninstall --global requirejs
+
+	rm -rf ${SEAFILE_HOME}/conf
 )
 
 # FIXME: Move the runtime translation script over here!

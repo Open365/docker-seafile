@@ -37,7 +37,10 @@ RUN \
 		memcached \
 		patch && \
 	npm install -g eyeos-service-ready-notify-cli && \
-	${INSTALLATION_DIR}/install_seafile.sh
+	${INSTALLATION_DIR}/install_seafile.sh && \
+	apk del build-base git patch && \
+	npm cache clean && \
+	rm -fr /etc/ssl /var/cache/apk/* /tmp/*
 
 VOLUME /opt/seafile/seafile-data
 
