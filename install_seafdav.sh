@@ -13,3 +13,5 @@ rm -rf /usr/share/seafdav
 cp -rf /opt/seafdav/ /usr/share/seafdav/
 rm -rf /opt/seafdav
 
+cd /usr/share/seafdav
+rm -rf .git

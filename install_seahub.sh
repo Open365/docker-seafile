@@ -16,6 +16,7 @@ SEAHUB_DIR="$SEAFILE_DIR/seahub"
 git clone --depth 1 --branch open365 https://github.com/Open365/seahub.git "$SEAHUB_DIR"
 
 cd $SEAHUB_DIR
+rm -rf .git
 
 echo python-memcached >> requirements.txt
 pip install -r requirements.txt
@@ -48,7 +49,5 @@ cp $SEAFILE_HOME/scripts/seahub.conf $SEAFILE_HOME/scripts/runtime/seahub.conf
 
 	rm -rf ${SEAFILE_HOME}/conf
 )
-
-# FIXME: Move the runtime translation script over here!
 
 apk del python-dev gettext gettext-dev glib-dev libsearpc-dev ccnet-dev seafile-dev
