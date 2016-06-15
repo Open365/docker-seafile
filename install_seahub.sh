@@ -3,6 +3,12 @@ set -e
 set -x
 set -o pipefail
 
+# These are required for pillow and specially zlib needs to be in /usr/lib
+# because that's where the python setup script looks
+# without this seahub will not have thumbnails!
+apk add --no-cache zlib-dev jpeg-dev
+cp /lib/libz.* /usr/lib/
+
 apk add --no-cache bash \
 	 py-dateutil py-mako py-simplejson py-pillow py-pip py-six python-dev \
 	 python py-django1.5 py-gunicorn py-chardet py-django-djblets \
