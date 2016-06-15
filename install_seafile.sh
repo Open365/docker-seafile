@@ -15,6 +15,7 @@ wget \
 	${BASE_URL}/ccnet-libs-5.0.5-r0.apk \
 	${BASE_URL}/libsearpc-3.0.7-r0.apk \
 	${BASE_URL}/libsearpc-dev-3.0.7-r0.apk \
+	${BASE_URL}/libevhtp-1.2.9-r0.apk \
 	${BASE_URL}/py-ccnet-5.0.5-r0.apk \
 	${BASE_URL}/py-libsearpc-3.0.7-r0.apk \
 	${BASE_URL}/py-seafile-5.0.5-r1.apk \
