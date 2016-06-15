@@ -118,6 +118,7 @@ echo "FILE_SERVER_PORT = os.environ.get('FILE_SERVER_PORT','8082')" >> /tmp/newf
 cat $CONF_DIR/seahub_settings.py >> /tmp/newfile
 mv /tmp/newfile $CONF_DIR/seahub_settings.py
 
+mkdir -p '/opt/seafile/seahub-data/thumbnail/thumb/'
 cat >> $CONF_DIR/seahub_settings.py <<-SEAHUB_SETTINGS
 	AUTHENTICATION_BACKENDS = (
 		'eyeos.auth.EyeosCardAuthBackend',

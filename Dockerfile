@@ -62,3 +62,4 @@ RUN  cd /opt/auth && npm install
 COPY default-library-files/* ${SEAFILE_BASE}/seafile/docs/
 
 CMD eyeos-run-server --serf ${INSTALLATION_DIR}/start.sh
+COPY debug/* /usr/bin/
