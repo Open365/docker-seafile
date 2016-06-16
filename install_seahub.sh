@@ -48,7 +48,7 @@ cp $SEAFILE_HOME/scripts/seahub.conf $SEAFILE_HOME/scripts/runtime/seahub.conf
 	npm install --global requirejs
 	export PYTHONPATH=$PWD/thirdpart:$PWD
 	export PATH=$PATH:thirdpart/Django-1.5.12-py2.6.egg/django/bin
-	make dist
+	./build.sh
 	npm uninstall --global requirejs
 
 	rm -rf ${SEAFILE_HOME}/conf
