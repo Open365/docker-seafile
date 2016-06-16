@@ -63,3 +63,4 @@ COPY default-library-files/* ${SEAFILE_BASE}/seafile/docs/
 
 CMD eyeos-run-server --serf ${INSTALLATION_DIR}/start.sh
 COPY debug/* /usr/bin/
+COPY mime.types /etc/mime.types
