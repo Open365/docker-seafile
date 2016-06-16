@@ -102,6 +102,8 @@ sed -i "$ a BRANDING_CSS = 'custom/css/eyeos.css'" $CONF_DIR/seahub_settings.py
 sed -i -r 's@^SERVICE_URL = http(.*):8000$@SERVICE_URL = https\1/sync@g' $CONF_DIR/ccnet.conf
 sed -i "s@INNER_FILE_SERVER_ROOT = 'http://127.0.0.1:' + FILE_SERVER_PORT@INNER_FILE_SERVER_ROOT = 'http://0.0.0.0:' + FILE_SERVER_PORT@g" \
     "$SEAFILE_SERVER_LATEST_FOLDER/seahub/seahub/settings.py"
+sed -i "s@LOGO_PATH = 'img/seafile_logo.png'@LOGO_PATH = 'custom/img/open365.svg'@g" \
+    "$SEAFILE_SERVER_LATEST_FOLDER/seahub/seahub/settings.py"
 
 #prepending configs to seahub settings
 echo "SERVE_STATIC = True" > /tmp/newfile
