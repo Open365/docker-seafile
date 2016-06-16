@@ -41,9 +41,7 @@ cp $SEAFILE_HOME/scripts/seahub.conf $SEAFILE_HOME/scripts/runtime/seahub.conf
 	mkdir -p ${SEAFILE_HOME}/conf
 	cat <<-END >> ${SEAFILE_HOME}/conf/ccnet.conf
 	[General]
-	USER_NAME = username-does-not-matter
 	ID = id-does-not-matter
-	NAME = groot-does-not-matter
 	SERVICE_URL = https://this-does-not-matter/
 	END
 
