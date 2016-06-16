@@ -197,10 +197,28 @@ fi
 
 # Starting seafdav!!
 cp -f /seafdav.conf /var/lib/seafile/conf/seafdav.conf
-
 export SEAFDAV_CONF=/var/lib/seafile/conf/seafdav.conf
-$SEAFILE_SERVER_LATEST_FOLDER/seafdav.sh start &
+$SEAFILE_SERVER_LATEST_FOLDER/seafdav.sh start
 
 eyeos-service-ready-notify-cli &
 
 /usr/bin/memcached -u root -m "${MEMCACHED_MEMORY}" >> /var/log/memcached.log 2>&1 &
+
+cat <<-END
+Seafile is ready and happy to serve requests
+
+
+     .-""""""-.
+   .'          '.
+  /   O      O   \
+ :                :
+ |                |
+ : ',          ,' :
+  \  '-......-'  /
+   '.          .'
+     '-......-'
+
+
+END
+
+tail -f /var/lib/seafile/logs/seahub_gunicorn_access.log

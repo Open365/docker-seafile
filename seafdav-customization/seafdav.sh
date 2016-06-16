@@ -108,8 +108,18 @@ function before_start() {
 function start_seafdav () {
     before_start;
     cd /usr/share/seafdav
-    $PYTHON -m wsgidav.server.run_server -H 0.0.0.0
+    $PYTHON -m wsgidav.server.run_server -H 0.0.0.0 &
+
+    # Ensure seafdav is started successfully
+    sleep 5
+    if ! pgrep -f "wsgidav.server.run_server" 2>/dev/null 1>&2; then
+        printf "\033[33mError:Seafdav failed to start.\033[m\n"
+        echo "Please try to run \"./seafdav.sh start\" again"
+        exit 1;
+    fi
+    echo
     echo "Seafdav is started"
+    echo
 }
 
 function prepare_env() {
