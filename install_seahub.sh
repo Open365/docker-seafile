@@ -9,10 +9,11 @@ set -o pipefail
 apk add --no-cache zlib-dev jpeg-dev
 cp /lib/libz.* /usr/lib/
 
-apk add --no-cache bash \
-	 py-dateutil py-mako py-simplejson py-pillow py-pip py-six python-dev \
-	 python py-django1.5 py-gunicorn py-chardet py-django-djblets \
-	 py-django-simple-captcha py-django-registration py-flup py-mysqldb gettext
+# These packages need to install seahub. Packages installed from the scripts-base:
+# apk add --no-cache bash \
+#	 py-dateutil py-mako py-simplejson py-pillow py-pip py-six python-dev \
+#	 python py-django1.5 py-gunicorn py-chardet py-django-djblets \
+#	 py-django-simple-captcha py-django-registration py-flup py-mysqldb gettext
 
 SEAFILE_HOME='/var/lib/seafile'
 SEAFILE_DIR="$SEAFILE_HOME/scripts"
@@ -54,4 +55,5 @@ cp $SEAFILE_HOME/scripts/seahub.conf $SEAFILE_HOME/scripts/runtime/seahub.conf
 	rm -rf ${SEAFILE_HOME}/conf
 )
 
-apk del python-dev gettext gettext-dev glib-dev libsearpc-dev ccnet-dev seafile-dev
+# These packages need to install seahub. Packages uninstalled from the scripts-base:
+# apk del python-dev gettext gettext-dev glib-dev libsearpc-dev ccnet-dev seafile-dev

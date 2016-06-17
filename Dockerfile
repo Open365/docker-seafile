@@ -21,6 +21,7 @@ COPY [ \
 	"${INSTALLATION_DIR}" \
 ]
 COPY patches /opt/patches
+COPY alpine-*.list /var/service/
 
 # These environment variables are used by seafile, seahub and seafdav
 # They aren't striclty required as the scripts set them, however, it is
@@ -31,14 +32,10 @@ ENV SEAFILE_CENTRAL_CONF_DIR /var/lib/seafile/conf
 ENV PYTHONPATH /var/lib/seafile/scripts/seahub/thirdpart:/usr/lib/python2.7/site-packages
 
 RUN \
-	apk add --update --no-cache \
-		build-base \
-		git \
-		memcached \
-		patch && \
+	/scripts-base/buildDependencies.sh --production --install && \
 	npm install -g eyeos-service-ready-notify-cli && \
 	${INSTALLATION_DIR}/install_seafile.sh && \
-	apk del build-base git patch && \
+	/scripts-base/buildDependencies.sh --production --purgue && \
 	npm cache clean && \
 	rm -fr /etc/ssl /var/cache/apk/* /tmp/*
 
