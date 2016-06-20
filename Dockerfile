@@ -1,15 +1,15 @@
 FROM docker-registry.eyeosbcn.com/alpine6-node-base
 
-ENV SEAFILE_VERSION 5.0.5
-ENV ENABLE_DJANGO_DEBUG 0
-ENV WHATAMI seafileServer
-ENV INSTALLATION_DIR /var/service/
-ENV MEMCACHED_HOST localhost
-ENV MEMCACHED_PORT 11211
-ENV MEMCACHED_MEMORY 256
-
-#this is the default quota of seafile.
-ENV SEAFILE_QUOTA 2
+ENV \
+    SEAFILE_VERSION=5.0.5 \
+    ENABLE_DJANGO_DEBUG=0 \
+    WHATAMI=seafileServer \
+    INSTALLATION_DIR=/var/service/ \
+    MEMCACHED_HOST=localhost \
+    MEMCACHED_PORT=11211 \
+    MEMCACHED_MEMORY=256 \
+    SEAFILE_QUOTA=2
+    #this is the default quota of seafile.
 
 EXPOSE 10001 12001 8000 8080 8082
 
