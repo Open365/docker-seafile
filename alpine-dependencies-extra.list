@@ -1,0 +1,35 @@
+# Install packages to images docker, "common" is declared into dependencies.list of alpine6-node-base.
+add="bash \
+     build-base \
+     gettext \
+     git \
+     memcached \
+     patch \
+     py-chardet \
+     py-dateutil \
+     py-django1.5 \
+     py-django-djblets \
+     py-django-simple-captcha \
+     py-django-registration \
+     py-flup \
+     py-gunicorn \
+     py-mako \
+     py-mysqldb \
+     py-pillow \
+     py-pip \
+     py-simplejson \
+     py-six \
+     python \
+     python-dev"
+
+# Delete packages to images docker, "common" is declared into dependencies.list of alpine6-node-base.
+del="build-base \
+     ccnet-dev \
+     gettext \
+     gettext-dev \
+     git \
+     glib-dev \
+     libsearpc-dev \
+     patch \
+     python-dev \
+     seafile-dev"
