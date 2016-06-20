@@ -17,7 +17,7 @@ cp /lib/libz.* /usr/lib/
 
 SEAFILE_HOME='/var/lib/seafile'
 SEAFILE_DIR="$SEAFILE_HOME/scripts"
-SEAHUB_DIR="$SEAFILE_DIR/seahub"
+SEAHUB_DIR="/var/lib/seahub"
 
 # Use open365's seahub from github
 git clone --depth 1 --branch open365 https://github.com/Open365/seahub.git "$SEAHUB_DIR"
@@ -29,8 +29,8 @@ echo python-memcached >> requirements.txt
 pip install -r requirements.txt
 
 mkdir -m 755 -p $SEAFILE_HOME/seafile-server
-ln -s $SEAFILE_DIR/seahub $SEAFILE_HOME/seafile-server
-ln -s $SEAFILE_DIR/seahub /var/lib/seahub
+ln -s $SEAHUB_DIR $SEAFILE_HOME/seafile-server/seahub
+ln -s $SEAHUB_DIR $SEAFILE_DIR/seahub
 
 mkdir -m 755 $SEAFILE_HOME/scripts/seafile
 mkdir -m 755 $SEAFILE_HOME/scripts/runtime
